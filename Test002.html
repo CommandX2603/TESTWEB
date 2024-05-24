@@ -3,59 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fortnite Fan Page</title>
+    <title>Simple Shooting Game</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #333;
-            color: white;
             margin: 0;
-            padding: 0;
-            text-align: center;
+            overflow: hidden;
+            background: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-        header {
-            background-color: #ff9800;
-            padding: 20px;
-            font-size: 2em;
+        canvas {
+            background: #fff;
+            border: 1px solid #000;
         }
-        .content {
-            padding: 20px;
-        }
-        .fortnite-image {
-            width: 300px;
-            height: auto;
-            margin: 20px auto;
-        }
-        .btn {
-            background-color: #ff9800;
+        #score {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 20px;
             color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            margin: 20px 0;
-        }
-        .btn:hover {
-            background-color: #e68900;
         }
     </style>
 </head>
 <body>
-    <header>
-        Welcome to the Fortnite Fan Page!
-    </header>
-    <div class="content">
-        <h1>About Fortnite</h1>
-        <p>Fortnite is a popular online video game developed by Epic Games. It was released in 2017 and has become one of the most famous battle royale games worldwide.</p>
-        <img src="https://via.placeholder.com/300" alt="Fortnite Image" class="fortnite-image">
-        <button class="btn" onclick="displayMessage()">Click for Fun Fact</button>
-        <p id="funFact"></p>
-    </div>
+    <div id="score">Score: 0</div>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
     <script>
-        function displayMessage() {
-            document.getElementById('funFact').innerText = 'Did you know? Fortnite has over 350 million registered players!';
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let player = { x: 400, y: 550, width: 50, height: 50 };
+        let bullets = [];
+        let enemies = [];
+        let score = 0;
+
+        function drawPlayer() {
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(player.x, player.y, player.width, player.height);
         }
+
+        function drawBullets() {
+            ctx.fillStyle = 'red';
+            bullets.forEach(bullet => {
+                ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+            });
+        }
+
+        function drawEnemies() {
+            ctx.fillStyle = 'green';
+            enemies.forEach(enemy => {
+                ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+            });
+        }
+
+        function updateBullets() {
+            bullets = bullets.filter(bullet => bullet.y > 0);
+            bullets.forEach(bullet => bullet.y -= 5);
+        }
+
+        function updateEnemies() {
+            enemies = enemies.filter(enemy => enemy.y < canvas.height);
+            enemies.forEach(enemy => enemy.y += 2);
+        }
+
+        function detectCollisions() {
+            bullets.forEach(bullet => {
+                enemies.forEach((enemy, enemyIndex) => {
+                    if (bullet.x < enemy.x + enemy.width &&
+                        bullet.x + bullet.width > enemy.x &&
+                        bullet.y < enemy.y + enemy.height &&
+                        bullet.y + bullet.height > enemy.y) {
+                        enemies.splice(enemyIndex, 1);
+                        score += 10;
+                        document.getElementById('score').innerText = `Score: ${score}`;
+                    }
+                });
+            });
+        }
+
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawPlayer();
+            drawBullets();
+            drawEnemies();
+            updateBullets();
+            updateEnemies();
+            detectCollisions();
+            requestAnimationFrame(gameLoop);
+        }
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'ArrowLeft' && player.x > 0) {
+                player.x -= 10;
+            }
+            if (event.key === 'ArrowRight' && player.x < canvas.width - player.width) {
+                player.x += 10;
+            }
+            if (event.key === ' ') {
+                bullets.push({ x: player.x + player.width / 2 - 2.5, y: player.y, width: 5, height: 10 });
+            }
+        });
+
+        setInterval(() => {
+            const x = Math.random() * (canvas.width - 50);
+            enemies.push({ x, y: 0, width: 50, height: 50 });
+        }, 1000);
+
+        gameLoop();
     </script>
 </body>
 </html>
