@@ -95,10 +95,10 @@
         }
 
         document.addEventListener('keydown', event => {
-            if (event.key === 'ArrowLeft' && player.x > 0) {
+            if (event.key === 'A' && player.x > 0) {
                 player.x -= 10;
             }
-            if (event.key === 'ArrowRight' && player.x < canvas.width - player.width) {
+            if (event.key === 'D' && player.x < canvas.width - player.width) {
                 player.x += 10;
             }
             if (event.key === ' ') {
