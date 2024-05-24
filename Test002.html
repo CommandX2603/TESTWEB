@@ -3,46 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Platformer Game</title>
+    <title>Fortnite Nin</title>
     <style>
         body {
-            margin: 0;
-            overflow: hidden;
-        }
-        canvas {
-            display: block;
-            background: #87CEEB;
-        }
-        .controls {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-        }
-        .button {
-            width: 50px;
-            height: 50px;
-            background-color: rgba(0, 0, 0, 0.5);
+            font-family: Arial, sans-serif;
+            background-color: #282c34;
             color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 24px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #61dafb;
+            padding: 20px;
+            font-size: 2em;
+        }
+        .content {
+            padding: 20px;
+        }
+        .fortnite-image {
+            width: 300px;
+            height: auto;
+            margin: 20px auto;
         }
     </style>
 </head>
 <body>
-    <canvas id="gameCanvas"></canvas>
-    <div class="controls">
-        <button class="button" id="leftButton">←</button>
-        <button class="button" id="jumpButton">↑</button>
-        <button class="button" id="rightButton">→</button>
+    <header>
+        Welcome to Fortnite Nin!
+    </header>
+    <div class="content">
+        <h1>About Fortnite Nin</h1>
+        <p>Fortnite Nin is a place for fans of the popular game Fortnite. Stay tuned for more content and updates!</p>
+        <img src="https://via.placeholder.com/300" alt="Fortnite Nin" class="fortnite-image">
     </div>
-    <script src="game.js"></script>
 </body>
 </html>
