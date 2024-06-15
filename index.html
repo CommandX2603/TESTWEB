@@ -3,43 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Video</title>
+    <title>Favorite Websites</title>
     <style>
-        /* Optional: Center the video on the page */
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #E0E0E0;
             margin: 0;
-            background-color: #f0f0f0;
+            padding: 0;
         }
-        video {
-            outline: none;
+        header {
+            background-color: #1F1F1F;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        main {
+            margin: 20px auto;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #1E1E1E;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+        }
+        h1 {
+            margin: 0;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 15px 0;
+        }
+        a {
+            text-decoration: none;
+            color: #64B5F6;
+            font-size: 1.2em;
+            padding: 10px;
+            display: block;
+            background-color: #2C2C2C;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        a:hover {
+            background-color: #3E3E3E;
+            color: #90CAF9;
         }
     </style>
 </head>
 <body>
-    <video id="myVideo" width="600">
-        <source src="movie.mp4" type="video/mp4">
-        <source src="movie.ogg" type="video/ogg">
-        Your browser does not support the video tag.
-    </video>
-    <div>
-        <button onclick="playVideo()">Play</button>
-        <button onclick="pauseVideo()">Pause</button>
-    </div>
-
-    <script>
-        const video = document.getElementById('myVideo');
-
-        function playVideo() {
-            video.play();
-        }
-
-        function pauseVideo() {
-            video.pause();
-        }
-    </script>
+    <header>
+        <h1>Test Websites (Test purposes only)</h1>
+    </header>
+    <main>
+        <ul>
+            <li><a href="#Test002" target="_blank">Test#002</a></li>
+        </ul>
+    </main>
 </body>
 </html>
